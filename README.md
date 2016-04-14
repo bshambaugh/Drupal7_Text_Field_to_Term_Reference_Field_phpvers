@@ -1,3 +1,23 @@
+Specific Instructions as used:
+
+1. Clone the repository (be sure the fields isp_column [text], ispcolumn [term reference], entity_type [text], and field_vie_reference_tags [term_reference]    exist in your content type)
+2. Change the username an password to thos appropriate to the database in each of the contained files.
+3. Change the text field name and the term reference field name to the appropriate values in each of the contained files.
+   (see the database with a tool like phpmyadmin to see that the tables and fields are the correct names) ..
+    In select_text_nid.php:
+    $text_field_name = 'isp_column';
+    $term_reference_field_name = 'field_ispcolumn';
+
+    or
+
+    $text_field_name = 'entity_type';
+    $term_reference_field_name = 'field_vie_reference_tags';
+4. In each PDO MySQL query change the dbname to be dbname={your_data_base_name}
+5. Run the script with php taxonomy-term-create.php
+6. Clear the Drupal cache with drush cache-clear all
+
+Discussions:
+
 This is a script to convert a Text Field to a Term Reference Field for Nodes of Specified Content Types. It was built for Drupal 7.
 
 Please Create a Content Type (bundle) containing a fields for the assigned names of the text_field_name and term_reference_field_name variables.
@@ -11,15 +31,17 @@ You will also need to change to your database name, set your sql password and yo
 ername for all instances in the code.
 The scripts contained include:
 
-    taxonomy-term-create.php
+    taxonomy-term-create.php (the one you run)
+   
+    php files required by taxonomy-term-create:
+  
     select_text_nid.php
     remove-duplicate-text-nid-pairs.php
     create_taxonomy_term_with_text.php
     remove-duplicate-nid-tid-pairs.php
     taxonomy-write-maps.php
-
     taxonomy-add-to-index.php
-    taxonomy-term-create.php
+  
 
     Wrapper function that calls select_text_nid.php , create_taxonomy_term_with_text.php , taxonomy-write-maps.php , and taxonomy-add-to-index.php and
     select_text_nid.php
